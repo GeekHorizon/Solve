@@ -9,6 +9,7 @@ public class 삼육구 {
 	private int rangeEnd = 1000;
 	
 	/**
+	 * pull request 용 주석
 	 * @param args
 	 */
 	public static void main(String[] args) {
