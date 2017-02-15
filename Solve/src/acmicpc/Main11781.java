@@ -1,4 +1,4 @@
-package acmicpc.n11781;
+package acmicpc;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,7 +46,7 @@ import java.io.InputStreamReader;
  * 
  * https://www.acmicpc.net/problem/11781
  */
-public class Main {
+public class Main11781 {
      
     /**
      * 지점 
@@ -96,7 +96,7 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
          
-        Main closingHour = new Main();
+        Main11781 closingHour = new Main11781();
           
         // 입력 부분
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
