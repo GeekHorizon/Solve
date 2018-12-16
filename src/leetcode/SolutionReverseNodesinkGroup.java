@@ -27,43 +27,28 @@ import java.util.Stack;
 public class SolutionReverseNodesinkGroup {
 
 	public ListNode reverseKGroup(ListNode head, int k) {
-		Stack<ListNode> reverseNodeStack = new Stack<ListNode>();
 		
-		ListNode dummyNode = new ListNode(0);
-		dummyNode.next = head;
-		ListNode findNode = dummyNode;
+		ListNode currentNode = head;
+		int nodeCount = 0;
 		
-		
-		while (findNode != null) {
-			
-			reverseNodeStack.push(findNode);
-			
-			if (reverseNodeStack.size() == k) {
-				
-				if (findNode.next == null) {
-					break;
-				}
-				
-				ListNode reverseNodeRoot = findNode.next;
-				ListNode reverseNodeRootFind = reverseNodeRoot;
-				ListNode reverseNodeNodex = reverseNodeRoot.next;
-				
-				while (reverseNodeStack.size() > 1) {
-					reverseNodeRootFind.next = reverseNodeStack.pop();
-					reverseNodeRootFind = reverseNodeRootFind.next;
-				}
-				reverseNodeStack.pop().next = reverseNodeRoot;
-				reverseNodeRootFind.next = reverseNodeNodex;
-				
-				findNode = reverseNodeRootFind;
-				reverseNodeStack.push(findNode);
-			}
-				
-			findNode = findNode.next;
-			
+		while (currentNode != null && nodeCount != k) {
+			currentNode = currentNode.next;
+			nodeCount++;
 		}
 		
-		return dummyNode.next;
+		if (nodeCount == k) {
+			currentNode = reverseKGroup(currentNode, k);
+			
+			while (nodeCount-- > 0) {
+				
+				ListNode temp = head.next;
+				head.next = currentNode;
+				currentNode = head;
+				head = temp;
+			}
+			head = currentNode;
+		}
+		return head;
 	}
 	
 	public class ListNode {
