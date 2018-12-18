@@ -54,9 +54,6 @@ public class SolutionRemoveElement {
     			continue;
     		}
     		
-    		if (elementCount != -1 && nums[elementCount] == nums[idx]) {
-    			continue;
-    		}
     		
     		nums[++elementCount] = nums[idx];
     	}
