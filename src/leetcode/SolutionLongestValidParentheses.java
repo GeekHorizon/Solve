@@ -17,51 +17,42 @@ import java.util.Stack;
 public class SolutionLongestValidParentheses {
 
 	public int longestValidParentheses(String s) {
-
-		char startBucket = '(';
-		int longestValidParenteses = 0;
+		Stack<Integer> stack = new Stack<>();
 		
-		int idx = 0; 
-		int length = s.length();
-		while (idx < length) {
-			int findWordLength = 0;
-			int bucketLength = 0;
+		for (int idx = 0; idx < s.length(); idx++) {
 			
-			
-			int halfSize = length - idx + 1;
-
-			for (int wordIdx = idx; wordIdx < length; wordIdx++) {
-
-				if (bucketLength > halfSize) {
-					break;
-				}
-
-				if (s.charAt(wordIdx) == startBucket) {
-					bucketLength++;
-					continue;
-				}
-
-				if (bucketLength == 0) {
-					break;
-				}
-
-				bucketLength--;
-
-				if (bucketLength == 0) {
-					findWordLength = wordIdx + 1 - idx;
+			if (s.charAt(idx) == '(') {
+				stack.push(idx);
+			} else {
+				if (!stack.isEmpty()) {
+					if (s.charAt(stack.peek()) == '(') {
+						stack.pop();
+					} else {
+						stack.push(idx);	
+					}
+				} else {
+					stack.push(idx);
 				}
 			}
-
-			if (longestValidParenteses < findWordLength) {
-				longestValidParenteses = findWordLength;
-				idx += longestValidParenteses;
-			}
-			
-			idx++;
 		}
 
-		return longestValidParenteses;
-
+		if (stack.isEmpty()) {
+			return s.length();
+		}
+		
+		int right = s.length();
+		int longest = 0;
+		
+		while (!stack.isEmpty()) {
+			int left = stack.pop();
+			
+			longest = Math.max(longest, right - left - 1);
+			right = left;
+		}
+		longest = Math.max(longest, right);
+		
+		
+		return longest;
 	}
 
 }
